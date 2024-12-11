@@ -1,22 +1,29 @@
-This repo consists of a Handson Project to help you learn AWS at ease. 
+## ⭐ This repo consists of a Hands-on Projects to help you learn AWS at ease. ⭐
 
-Want to make a contribution, fork the project, and send a PR 
+✅ Want to make a contribution, fork the project, and send a PR 
 
 ### SCOPES:
-[VPC Project](https://github.com/ChisomJude/AWS-Learn-with-Projects/tree/master/VPC) <be>
+- [x] PROJECT ON AWS MGT CONSOLE <be>
 
-CLOUD FORMATION  <be>
-Deploy Jenkins Server with CF 
+- [VPC Project](https://github.com/ChisomJude/AWS-Learn-with-Projects/tree/master/VPC) <br>
 
-PIPELINE/DEVOPS  - Coming soon<br>
+- [x] CLOUD FORMATION  <br>
+
+
+- [Deploy Jenkins Server with CF](https://github.com/ChisomJude/AWS-Learn-with-Projects/tree/master/CLOUDFORMATION/Deploy-Jenkins-Server) 
+
+
+- [ ] PIPELINE/DevOps  - Coming soon<br>
 
 
 ## Using Cloud formation
-- Ensure you have AWS CLI Installed
+- Ensure you have AWS CLI Installed is on your system
+- You will need Iam user Access Key and Secret ( depending on how you choose to connect
 - Ensure You have knowledge of Cloud Formation Templates
  [AWS Docs](https://aws.com/docs)
  ![Cloud Formation Logo](https://images.app.goo.gl/6t5QbRznQtQJgs8XA)
 
+##### Give this project a STAR ⭐  Make contributions via PR
     
         
 
