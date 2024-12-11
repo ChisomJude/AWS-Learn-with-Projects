@@ -1,0 +1,55 @@
+Parameters:
+  PublicSubnet:
+    Type: String
+    Description: The ID of the public subnet for the Jenkins instance.
+
+  JenkinsSecurityGroup:
+    Type: String
+    Description: The ID of the security group for the Jenkins instance.
+
+Resources:
+  JenkinsInstance:
+    Type: AWS::EC2::Instance
+    Properties:
+      InstanceType: t2.medium
+      KeyName: chisomjude
+      ImageId: ami-0166fe664262f664c
+      SubnetId: !Ref PublicSubnet
+      SecurityGroupIds:
+        - !Ref JenkinsSecurityGroup
+      UserData:
+        Fn::Base64: !Sub |
+          #!/bin/bash
+          # Update system packages
+          yum update -y
+
+          # Download and install Amazon Corretto 17
+          wget https://corretto.aws/downloads/latest/amazon-corretto-17-x64-linux-jdk.tar.gz
+          mkdir -p /opt/amazon-corretto-17
+          tar -xvzf amazon-corretto-17-x64-linux-jdk.tar.gz -C /opt/amazon-corretto-17 --strip-components 1
+
+          # Create symbolic links for Java and Javac
+          ln -sf /opt/amazon-corretto-17/bin/java /usr/bin/java
+          ln -sf /opt/amazon-corretto-17/bin/javac /usr/bin/javac
+
+          # Verify Java installation
+          java -version
+          javac -version
+
+          # Add Jenkins repository and import GPG key
+          wget -O /etc/yum.repos.d/jenkins.repo https://pkg.jenkins.io/redhat/jenkins.repo
+          rpm --import https://pkg.jenkins.io/redhat/jenkins.io.key
+
+          # Install Jenkins
+          yum install jenkins -y
+
+          # Start and enable Jenkins service
+          systemctl start jenkins
+          systemctl enable jenkins
+
+  JenkinsS3Bucket:
+    Type: AWS::S3::Bucket
+    Properties:
+      BucketName: !Sub "jenkins-backup-${AWS::AccountId}"
+      VersioningConfiguration:
+        Status: Enabled
